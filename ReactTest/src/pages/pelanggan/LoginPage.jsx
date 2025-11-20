@@ -1,99 +1,47 @@
-import { useState, useEffect } from "react";
-import { Container, Form, Button } from "react-bootstrap";
-import { toast } from "sonner";
+// src/pages/pelanggan/LoginPage.jsx
+import React, { useState, useEffect } from "react";
+import { Container, Form, FloatingLabel, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const LoginPage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [user, setUser] = useState({ username: "", password: "" });
 
-    useEffect(() => {
-        const logged = localStorage.getItem("loggedCustomer");
-        if (logged) navigate("/pelanggan/home");
-    }, [navigate]);
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role === "pelanggan") navigate("/layanan");
+  }, [navigate]);
 
-    const [form, setForm] = useState({
-        email: "",
-        password: "",
-    });
+  const handleChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!user.username || !user.password) return toast.error("Isi username & password");
+    // For demo: accept any username/password
+    localStorage.setItem("user", JSON.stringify({ username: user.username, loginAt: new Date() }));
+    localStorage.setItem("role", "pelanggan");
+    toast.success("Login pelanggan berhasil!");
+    navigate("/layanan");
+  };
 
-    const handleLogin = (e) => {
-        e.preventDefault();
+  return (
+    <Container className="mt-5">
+      <h1 className="text-center display-6">Login Pelanggan</h1>
+      <p className="text-center text-muted">Masuk untuk membuat booking</p>
+      <Alert variant="info">Bebas menggunakan username apa saja (demo). Jika mau akses admin, gunakan halaman /admin/login</Alert>
 
-        const { email, password } = form;
-
-        if (!email || !password) {
-            toast.error("Email dan password wajib diisi!");
-            return;
-        }
-
-        // Ambil semua pelanggan
-        const customers = JSON.parse(localStorage.getItem("customers")) || [];
-
-        // Cek kecocokan akun
-        const found = customers.find(
-            (c) => c.email === email && c.password === password
-        );
-
-        if (!found) {
-            toast.error("Akun tidak ditemukan! Silakan register terlebih dahulu.");
-            return;
-        }
-
-        // Simpan status login
-        localStorage.setItem("loggedCustomer", JSON.stringify(found));
-
-        toast.success("Login berhasil!");
-
-        setTimeout(() => navigate("/pelanggan/home"), 800);
-    };
-
-    return (
-        <Container className="mt-5 col-md-6">
-            <h2 className="text-center mb-4">Login Pelanggan</h2>
-
-            <Form onSubmit={handleLogin}>
-                <Form.Group className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type="email"
-                        name="email"
-                        placeholder="Masukkan email"
-                        value={form.email}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        name="password"
-                        placeholder="Masukkan password"
-                        value={form.password}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-
-                <Button variant="primary" className="w-100" type="submit">
-                    Login
-                </Button>
-
-                <p className="text-center mt-3">
-                    Belum punya akun?{" "}
-                    <span
-                        style={{ color: "blue", cursor: "pointer" }}
-                        onClick={() => navigate("/pelanggan/register")}
-                    >
-                        Daftar di sini
-                    </span>
-                </p>
-            </Form>
-        </Container>
-    );
+      <Form onSubmit={handleSubmit} style={{ maxWidth: 600, margin: "auto" }}>
+        <FloatingLabel label="Username" className="mb-3">
+          <Form.Control type="text" name="username" placeholder="username" onChange={handleChange} />
+        </FloatingLabel>
+        <FloatingLabel label="Password" className="mb-3">
+          <Form.Control type="password" name="password" placeholder="password" onChange={handleChange} />
+        </FloatingLabel>
+        <Button type="submit" className="w-100">Login</Button>
+      </Form>
+    </Container>
+  );
 };
 
 export default LoginPage;
