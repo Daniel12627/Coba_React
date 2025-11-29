@@ -22,8 +22,26 @@
 .profile-item strong {
   color: #333;
 }
+.logout-inside {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.logout-inside:hover {
+    opacity: 0.9;
+}
+
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+

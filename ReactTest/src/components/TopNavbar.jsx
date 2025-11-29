@@ -42,12 +42,10 @@ const TopNavbar = ({ routes }) => {
 
             {role ? (
               <>
-                <Nav.Link className="me-2">
-                  <span className="me-2">Hai, {user?.username || (role === "admin" ? "Admin" : "Pelanggan")}</span>
-                </Nav.Link>
-                <Nav.Link>
-                  <Button variant="danger" onClick={handleLogout}>Logout</Button>
-                </Nav.Link>
+                <span className="me-3 text-dark fw-semibold">
+                  Hai, {user?.username || (role === "admin" ? "Admin" : "Pelanggan")}
+                </span>
+
               </>
             ) : (
               <>

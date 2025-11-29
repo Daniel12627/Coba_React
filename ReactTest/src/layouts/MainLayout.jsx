@@ -9,6 +9,7 @@ const routes = [
   { path: "/layanan", name: "Layanan" },
   { path: "/booking", name: "Booking" },
   { path: "/pesanan", name: "Pesanan" },
+  { path: "/profile", name: "Profile" },
 ];
 
 const MainLayout = () => {
