@@ -1,0 +1,29 @@
+.profile-container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+  animation: fadeIn 0.4s ease;
+}
+
+.profile-title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #6a4bc3;
+}
+
+.profile-item {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.profile-item strong {
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

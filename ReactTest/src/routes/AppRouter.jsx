@@ -21,6 +21,8 @@ import RegisterPage from "../pages/pelanggan/RegisterPage";
 import LayananPage from "../pages/pelanggan/LayananPage";
 import BookingPage from "../pages/pelanggan/BookingPage";
 import PesananPage from "../pages/pelanggan/PesananPage";
+import ProfilePage from "../pages/pelanggan/ProfilePage";
+
 
 // admin pages
 import AdminLoginPage from "../pages/admin/AdminLoginPage";
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
       { path: "/layanan", element: <ProtectedUser><LayananPage /></ProtectedUser> },
       { path: "/booking", element: <ProtectedUser><BookingPage /></ProtectedUser> },
       { path: "/pesanan", element: <ProtectedUser><PesananPage /></ProtectedUser> },
+      { path: "/profile", element: <ProtectedUser><ProfilePage /></ProtectedUser> },
     ],
   },
 
