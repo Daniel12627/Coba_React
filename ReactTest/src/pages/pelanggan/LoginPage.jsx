@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Container, Form, FloatingLabel, Button } from "react-bootstrap";
+import { Form, FloatingLabel, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import "./LoginPage.css"; // 💗 CSS lucu di sini
+import Logo from "../../assets/images/Logo.png";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -18,7 +20,6 @@ const LoginPage = () => {
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // cek username & password sesuai data registrasi
     const found = users.find(
       (u) => u.username === username && u.password === password
     );
@@ -37,44 +38,50 @@ const LoginPage = () => {
   };
 
   return (
-    <Container className="mt-5 col-md-6">
-      <h2 className="mb-4 text-center">Login Pelanggan</h2>
-      <Form onSubmit={handleLogin}>
-        <FloatingLabel label="Username" className="mb-3">
-          <Form.Control
-            type="text"
-            placeholder="Username"
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-          />
-        </FloatingLabel>
+    <div className="login-bg">
+      <div className="login-card">
+        <div className="login-header">
+          <img src={Logo} alt="Salon Logo" className="login-logo" />
+          <h2 className="login-title">Aurora Salon</h2>
+          <p className="login-subtitle">Beauty & Care</p>
+        </div>
 
-        <FloatingLabel label="Password" className="mb-3">
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-          />
-        </FloatingLabel>
+        <Form onSubmit={handleLogin}>
+          <FloatingLabel label="Username" className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={form.username}
+              onChange={handleChange}
+              className="login-input"
+            />
+          </FloatingLabel>
 
-        <Button type="submit" className="w-100 mb-3">
-          Login
-        </Button>
+          <FloatingLabel label="Password" className="mb-3">
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              className="login-input"
+            />
+          </FloatingLabel>
 
-        <p className="text-center">
-          Belum punya akun?{" "}
-          <span
-            style={{ color: "blue", cursor: "pointer" }}
-            onClick={() => navigate("/register")}
-          >
-            Daftar di sini
-          </span>
-        </p>
-      </Form>
-    </Container>
+          <Button type="submit" className="login-btn w-100 mb-3">
+            Login
+          </Button>
+
+          <p className="login-register">
+            Belum punya akun?{" "}
+            <span className="login-link" onClick={() => navigate("/register")}>
+              Daftar di sini
+            </span>
+          </p>
+        </Form>
+      </div>
+    </div>
   );
 };
 

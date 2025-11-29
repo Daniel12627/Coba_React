@@ -4,9 +4,9 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import ImageCarousel from "../../components/ImageCarousel";
 
 const images = [
-  { img: "https://images.unsplash.com/photo-1556228722-0c9e1a6b03f8?auto=format&fit=crop&w=1200&q=80", title: "Hair Styling", description: "Tampil beda dengan potongan profesional" },
-  { img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80", title: "Coloring", description: "Warna rambut yang on-trend" },
-  { img: "https://images.unsplash.com/photo-1602810311186-0c3b6d0f6d1f?auto=format&fit=crop&w=1200&q=80", title: "Nail & Spa", description: "Perawatan tangan & kaki" },
+  { img: "src/assets/images/HairStyling.jpeg", title: "Hair Styling", description: "Tampil beda dengan potongan profesional" },
+  { img: "src/assets/images/Hair Coloring.jpeg", title: "Coloring", description: "Warna rambut yang on-trend" },
+  { img: "src/assets/images/Nail & Spa.jpeg", title: "Nail & Spa", description: "Perawatan tangan & kaki" },
 ];
 
 const HomePage = () => {

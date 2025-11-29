@@ -1,6 +1,10 @@
-// src/routes/index.jsx
+// src/routes/AppRouter.jsx
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { Toaster } from "sonner";
 
 // layouts
@@ -12,7 +16,6 @@ import ProtectedAdmin from "./protected/ProtectedAdmin";
 import ProtectedUser from "./protected/ProtectedUser";
 
 // pelanggan pages
-import HomePage from "../pages/pelanggan/HomePage";
 import LoginPage from "../pages/pelanggan/LoginPage";
 import RegisterPage from "../pages/pelanggan/RegisterPage";
 import LayananPage from "../pages/pelanggan/LayananPage";
@@ -27,28 +30,37 @@ import AdminPesananPage from "../pages/admin/AdminPesananPage";
 import AdminJadwalPage from "../pages/admin/AdminJadwalPage";
 
 const router = createBrowserRouter([
-  { path: "*", element: <div className="p-5">404 - Halaman Tidak Ditemukan</div> },
+  {
+    path: "*",
+    element: <div className="p-5">404 - Halaman Tidak Ditemukan</div>,
+  },
 
-  // pelanggan (public + protected)
+  // ===== AUTH (TANPA LAYOUT) =====
+  { path: "/", element: <Navigate to="/login" replace /> },
+  { path: "/login", element: <LoginPage /> },
+  { path: "/register", element: <RegisterPage /> },
+
+  // ===== PELANGGAN (DENGAN LAYOUT) =====
   {
     element: <MainLayout />,
     children: [
-      { path: "/", element: <HomePage /> },
-      { path: "/login", element: <LoginPage /> },
-      { path: "/register", element: <RegisterPage /> },
       { path: "/layanan", element: <ProtectedUser><LayananPage /></ProtectedUser> },
       { path: "/booking", element: <ProtectedUser><BookingPage /></ProtectedUser> },
       { path: "/pesanan", element: <ProtectedUser><PesananPage /></ProtectedUser> },
     ],
   },
 
-  // admin auth (public)
+  // ===== ADMIN LOGIN (TANPA LAYOUT) =====
   { path: "/admin/login", element: <AdminLoginPage /> },
 
-  // admin protected
+  // ===== ADMIN PROTECTED (DENGAN LAYOUT) =====
   {
     path: "/admin",
-    element: <ProtectedAdmin><AdminLayout /></ProtectedAdmin>,
+    element: (
+      <ProtectedAdmin>
+        <AdminLayout />
+      </ProtectedAdmin>
+    ),
     children: [
       { path: "dashboard", element: <AdminDashboardPage /> },
       { path: "layanan", element: <AdminLayananPage /> },
